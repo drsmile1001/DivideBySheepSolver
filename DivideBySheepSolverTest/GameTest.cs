@@ -1,5 +1,6 @@
 ﻿using DivideBySheepSolver;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -48,7 +49,7 @@ namespace DivideBySheepSolverTest
                     })
                 }
             };
-            Assert.Equal(expected, result);
+            Assert.Equal(expected, result.Select(item => item.Item2));
         }
 
         [Fact]
@@ -97,7 +98,8 @@ namespace DivideBySheepSolverTest
                     })
                 }
             };
-            Assert.Equal(expected, result);
+            var actual = result.Select(item => item.Item2).ToArray();
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -146,7 +148,7 @@ namespace DivideBySheepSolverTest
                     })
                 }
             };
-            Assert.Equal(expected, result);
+            Assert.Equal(expected, result.Select(item => item.Item2));
         }
 
         [Fact]
@@ -172,7 +174,11 @@ namespace DivideBySheepSolverTest
             foreach (var item in result)
             {
                 _testOutputHelper.WriteLine("---");
-                _testOutputHelper.WriteLine(item.Visualize());
+                if(item.Item1 != null)
+                    _testOutputHelper.WriteLine($"{item.Item1.Coordinate} {item.Item1.Direction}");
+                else
+                    _testOutputHelper.WriteLine($"起始版面");
+                _testOutputHelper.WriteLine(item.Item2.Visualize());
             }
         }
     }

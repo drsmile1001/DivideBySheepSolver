@@ -28,32 +28,33 @@ namespace DivideBySheepSolver
         /// </summary>
         public HashSet<Movement> UselessMovements { get; } = new HashSet<Movement>();
 
-        public List<Board> Play()
+        public List<(Movement, Board)> Play()
         {
             ReachedBoards.Add(InitialBoard);
-            Board successBoard = null;
-            while (successBoard == null)
+            (Movement, Board)? lastMovementAndResult = null;
+            while (lastMovementAndResult == null)
             {
                 var boards = Routes.Values.Any() ? Routes.Values.ToArray() : new[] { InitialBoard };
-                successBoard = Try(boards);
+                lastMovementAndResult = Try(boards);
             }
-            var solveBoards = new List<Board>();
+            var solveSteps = new List<(Movement, Board)>();
             var invertRoutes = Routes.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
             while (true)
             {
-                solveBoards.Add(successBoard);
-                if (invertRoutes.TryGetValue(successBoard, out var movement))
+                solveSteps.Add(lastMovementAndResult.Value);
+                if (invertRoutes.TryGetValue(lastMovementAndResult.Value.Item1.Board, out var movement))
                 {
-                    successBoard = movement.Board;
+                    lastMovementAndResult = (movement, lastMovementAndResult.Value.Item1.Board);
                 }
                 else
                     break;
             }
-            solveBoards.Reverse();
-            return solveBoards;
+            solveSteps.Add((null, InitialBoard));
+            solveSteps.Reverse();
+            return solveSteps;
         }
 
-        public Board Try(IEnumerable<Board> boards)
+        public(Movement, Board)? Try(IEnumerable<Board> boards)
         {
             var successMovement = boards.AsParallel().SelectMany(board => board.GetAllMovement())
                     .Where(movement => !Routes.ContainsKey(movement) && !UselessMovements.Contains(movement))
@@ -81,7 +82,7 @@ namespace DivideBySheepSolver
                 {
                     Routes.Add(movement, board);
                     ReachedBoards.Add(board);
-                    if (board.Solved) return board;
+                    if (board.Solved) return (movement, board);
                 }
             }
             return null;
