@@ -167,5 +167,11 @@ namespace DivideBySheepSolver
         {
             return $"{Coordinate},{Capacity},{AnimalAmount},{BoatOrder},{BoatSheep},{BoatWolf}";
         }
+
+        public string Visual()
+        {
+            var bo = BoatOrder?.ToString() ?? "I";
+            return $"{Capacity}{AnimalAmount}{bo}";
+        }
     }
 }

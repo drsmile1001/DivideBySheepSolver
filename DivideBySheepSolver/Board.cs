@@ -119,5 +119,23 @@ namespace DivideBySheepSolver
         {
             return Platforms.Aggregate(0, (agg, next) => agg ^ next.GetHashCode());
         }
+
+        public string Visualize()
+        {
+            var minX = Platforms.Min(item => item.Coordinate.X);
+            var minY = Platforms.Min(item => item.Coordinate.Y);
+            var maxX = Platforms.Max(item => item.Coordinate.X);
+            var maxY = Platforms.Max(item => item.Coordinate.Y);
+            var text = "";
+            for (int y = minY; y <= maxY; y++)
+            {
+                for (int x = minX; x <= maxX; x++)
+                {
+                    text += $"{ FindPlatformNow(new Coordinate(x, y))?.Visual() ?? "           "}{(x!= maxX ? " | " : "")}";
+                }
+                text += "\r\n";
+            }
+            return text;
+        }
     }
 }

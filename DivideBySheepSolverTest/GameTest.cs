@@ -172,10 +172,7 @@ namespace DivideBySheepSolverTest
             foreach (var item in result)
             {
                 _testOutputHelper.WriteLine("---");
-                foreach (var platforms in item.Platforms)
-                {
-                    _testOutputHelper.WriteLine(platforms.ToString());
-                }
+                _testOutputHelper.WriteLine(item.Visualize());
             }
         }
     }
