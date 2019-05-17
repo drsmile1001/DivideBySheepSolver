@@ -97,7 +97,11 @@ namespace DivideBySheepSolver
 
         public override string ToString()
         {
-            return $"({Sheep},{SheepHalf},{Wolf},{WolfFull})";
+            string format(int number)
+            {
+                return number == 0 ? "-" : number.ToString();
+            }
+            return $"({format(Sheep)},{format(SheepHalf)},{format(Wolf)},{format(WolfFull)})";
         }
     }
 }

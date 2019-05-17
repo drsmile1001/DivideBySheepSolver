@@ -170,7 +170,7 @@ namespace DivideBySheepSolver
 
         public string Visual()
         {
-            var bo = BoatOrder?.ToString() ?? "I";
+            var bo = BoatOrder?.ToString() ?? " ";
             return $"{Capacity}{AnimalAmount}{bo}";
         }
     }
