@@ -50,7 +50,7 @@ namespace DivideBySheepSolver
         /// <param name="wolf"></param>
         /// <param name="wolfFull"></param>
         /// <returns></returns>
-        public AnimalAmount Change(int sheep,int sheepHalf,int wolf,int wolfFull)
+        public AnimalAmount Change(int sheep, int sheepHalf, int wolf, int wolfFull)
         {
             return new AnimalAmount(Sheep + sheep, SheepHalf + sheepHalf, Wolf + wolf, WolfFull + wolfFull);
         }

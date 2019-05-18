@@ -127,7 +127,7 @@ namespace DivideBySheepSolverTest
                 model.TargetWolfFull));
             Assert.True(a.MoveTo(b, model.razor));
             Assert.Equal(new AnimalAmount(0, 0, 0, model.SourceWolfFull), a.AnimalAmount);
-            Assert.Equal(new AnimalAmount(model.ExpectedTargetSheep, model.ExpectedTargetSheepHalf,model.ExpectedTargetWolf, model.ExpectedTargetWolfFull),
+            Assert.Equal(new AnimalAmount(model.ExpectedTargetSheep, model.ExpectedTargetSheepHalf, model.ExpectedTargetWolf, model.ExpectedTargetWolfFull),
                 b.AnimalAmount);
         }
 
@@ -203,7 +203,7 @@ namespace DivideBySheepSolverTest
             {
                 SourceWolf = 2,
                 TargetCapacity = 3,
-                ExpectedTargetWolf  =2
+                ExpectedTargetWolf = 2
             });
         }
 
