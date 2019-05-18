@@ -65,17 +65,17 @@ namespace DivideBySheepSolverTest
         {
             var platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(3), 1, 3);
             Assert.True(platform.FulfillBoat);
-            platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(0, 6), 1, 3);
+            platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(0, sheepHalf: 6), 1, 3);
             Assert.True(platform.FulfillBoat);
-            platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(2, 2), 1, 3);
+            platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(2, sheepHalf: 2), 1, 3);
             Assert.True(platform.FulfillBoat);
-            platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(0, 0, 3), 1, 0, 3);
+            platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(0, 3, 0), 1, 0, 3);
             Assert.True(platform.FulfillBoat);
             platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(3), 1, 0, 3);
             Assert.False(platform.FulfillBoat);
-            platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(0, 3), 1, 3);
+            platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(0, sheepHalf: 3), 1, 3);
             Assert.False(platform.FulfillBoat);
-            platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(0, 0, 3), 1, 3);
+            platform = new Platform(new Coordinate(1, 1), 9, new AnimalAmount(0, 3, 0), 1, 3);
             Assert.False(platform.FulfillBoat);
         }
 
@@ -116,18 +116,18 @@ namespace DivideBySheepSolverTest
             var a = new Platform(new Coordinate(1, 1),
                 model.SourceCapacity,
                 new AnimalAmount(model.SourceSheep,
-                model.SourceSheepHalf,
-                model.SourceWolf,
-                model.SourceWolfFull));
+                    model.SourceWolf,
+                    model.SourceSheepHalf,
+                    model.SourceWolfFull));
             var b = new Platform(new Coordinate(2, 1),
                 model.TargetCapacity,
                 new AnimalAmount(model.TargetSheep,
-                model.TargetSheepHalf,
-                model.TargetWolf,
-                model.TargetWolfFull));
+                    model.TargetWolf,
+                    model.TargetSheepHalf,
+                    model.TargetWolfFull));
             Assert.True(a.MoveTo(b, model.razor));
             Assert.Equal(new AnimalAmount(0, 0, 0, model.SourceWolfFull), a.AnimalAmount);
-            Assert.Equal(new AnimalAmount(model.ExpectedTargetSheep, model.ExpectedTargetSheepHalf, model.ExpectedTargetWolf, model.ExpectedTargetWolfFull),
+            Assert.Equal(new AnimalAmount(model.ExpectedTargetSheep, model.ExpectedTargetWolf, model.ExpectedTargetSheepHalf, model.ExpectedTargetWolfFull),
                 b.AnimalAmount);
         }
 

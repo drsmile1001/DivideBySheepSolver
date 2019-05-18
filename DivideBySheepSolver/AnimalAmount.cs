@@ -14,7 +14,7 @@ namespace DivideBySheepSolver
             return !a.Equals(b);
         }
 
-        public AnimalAmount(int sheep = 0, int sheepHalf = 0, int wolf = 0, int wolfFull = 0)
+        public AnimalAmount(int sheep = 0, int wolf = 0, int sheepHalf = 0, int wolfFull = 0)
         {
             Sheep = sheep;
             SheepHalf = sheepHalf;
@@ -52,7 +52,7 @@ namespace DivideBySheepSolver
         /// <returns></returns>
         public AnimalAmount Change(int sheep, int sheepHalf, int wolf, int wolfFull)
         {
-            return new AnimalAmount(Sheep + sheep, SheepHalf + sheepHalf, Wolf + wolf, WolfFull + wolfFull);
+            return new AnimalAmount(Sheep + sheep, Wolf + wolf, SheepHalf + sheepHalf, WolfFull + wolfFull);
         }
 
         public override bool Equals(object obj)

@@ -333,5 +333,56 @@ namespace DivideBySheepSolverTest
             };
             PlayAndLogResult(game);
         }
+
+        [Fact]
+        public void 玩_1_8()
+        {
+            var game = new Game
+            {
+                InitialBoard = new Board
+                {
+                    Platforms = new HashSet<Platform>
+                    {
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),0,2),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),1,4),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),2,4),
+                        new Platform(new Coordinate(2,2),6,new AnimalAmount(0,2)),
+                        new Platform(new Coordinate(3,2),4,new AnimalAmount(4)),
+                        new Platform(new Coordinate(3,3),5,new AnimalAmount(5)),
+                        new Platform(new Coordinate(4,2),7,new AnimalAmount(7)),
+                        new Platform(new Coordinate(4,3),6,new AnimalAmount(0,2)),
+                    },
+                    Walls = new HashSet<WallCoordinate>
+                    {
+                        new WallCoordinate(3,2,3,3)
+                    }
+                }
+            };
+            PlayAndLogResult(game);
+        }
+
+        [Fact]
+        public void 玩_1_9()
+        {
+            var game = new Game
+            {
+                InitialBoard = new Board
+                {
+                    Platforms = new HashSet<Platform>
+                    {
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),0,5),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),1,1),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),2,3),
+                        new Platform(new Coordinate(2,1),6,new AnimalAmount(2)),
+                        new Platform(new Coordinate(2,2),6,new AnimalAmount(4)),
+                        new Platform(new Coordinate(3,1),7,new AnimalAmount(7)),
+                        new Platform(new Coordinate(3,2),5,new AnimalAmount(0,4)),
+                        new Platform(new Coordinate(3,3),6,new AnimalAmount(2)),
+                        new Platform(new Coordinate(4,2),5,new AnimalAmount(5)),
+                    }
+                }
+            };
+            PlayAndLogResult(game);
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace DivideBySheepSolverTest
                 Platforms = new HashSet<Platform>(new[]
                 {
                     new Platform(new Coordinate(1,1),4,new AnimalAmount(3)),
-                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,0,4)),
+                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,4,0)),
                     new Platform(new Coordinate(0,1),9,new AnimalAmount(),0,3),
                     new Platform(new Coordinate(0,1),9,new AnimalAmount(),1,0,4)
                 })
@@ -57,7 +57,7 @@ namespace DivideBySheepSolverTest
             {
                 Platforms = new HashSet<Platform>(new[]
                 {
-                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,0,4)),
+                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,4,0)),
                     new Platform(new Coordinate(1,1),4,new AnimalAmount(3)),
                     new Platform(new Coordinate(0,1),9,new AnimalAmount(),1,0,4),
                     new Platform(new Coordinate(0,1),9,new AnimalAmount(),0,3)
@@ -83,7 +83,7 @@ namespace DivideBySheepSolverTest
             {
                 Platforms = new HashSet<Platform>(new[]
                 {
-                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,0,4))
+                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,4,0))
                 })
             };
             Assert.NotEqual(a, b);
@@ -105,7 +105,7 @@ namespace DivideBySheepSolverTest
                 Platforms = new HashSet<Platform>(new[]
                 {
                     new Platform(new Coordinate(1,1),4,new AnimalAmount(3)),
-                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,0,4))
+                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,4,0))
                 })
             };
 
@@ -120,7 +120,7 @@ namespace DivideBySheepSolverTest
                 Platforms = new HashSet<Platform>(new[]
                 {
                     new Platform(new Coordinate(1,1),4,new AnimalAmount(3)),
-                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,0,4)),
+                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,4,0)),
                     new Platform(new Coordinate(0,1),9,new AnimalAmount(),0,3),
                     new Platform(new Coordinate(0,1),9,new AnimalAmount(),1,0,4)
                 })
@@ -131,7 +131,7 @@ namespace DivideBySheepSolverTest
                 Platforms = new HashSet<Platform>(new[]
                 {
                     new Platform(new Coordinate(1,1),4,new AnimalAmount(3)),
-                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,0,4)),
+                    new Platform(new Coordinate(1,2),4,new AnimalAmount(0,4,0)),
                     new Platform(new Coordinate(0,1),9,new AnimalAmount(),1,3),
                     new Platform(new Coordinate(0,1),9,new AnimalAmount(),0,0,4)
                 })

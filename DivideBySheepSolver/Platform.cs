@@ -123,11 +123,11 @@ namespace DivideBySheepSolver
                 sheep = Math.Min(sheep, capacity);
                 capacity -= sheep;
                 sheepHalf = Math.Min(sheepHalf, BoatOrder.HasValue ? capacity * 2 : capacity);
-                AnimalAmount = new AnimalAmount(sheep, sheepHalf, 0, wolfFull);
+                AnimalAmount = new AnimalAmount(sheep, 0, sheepHalf, wolfFull);
                 return;
             }
             wolf = Math.Min(wolf, capacity);
-            AnimalAmount = new AnimalAmount(0, 0, wolf, wolfFull);
+            AnimalAmount = new AnimalAmount(0, wolf, 0, wolfFull);
         }
 
         public override bool Equals(object obj)
