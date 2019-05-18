@@ -15,6 +15,11 @@ namespace DivideBySheepSolver
         public HashSet<Platform> Platforms { get; set; } = new HashSet<Platform>();
 
         /// <summary>
+        /// 墻壁
+        /// </summary>
+        public HashSet<WallCoordinate> Walls { get; set; } = new HashSet<WallCoordinate>();
+
+        /// <summary>
         /// 目前可操作的島嶼或救生艇
         /// </summary>
         public IEnumerable<Platform> PlatformsNow
@@ -78,12 +83,18 @@ namespace DivideBySheepSolver
         public (bool success, Board board) Move(Coordinate coordinate, Direction direction)
         {
             //查找要操作的兩平台，並檢查是否可移動
+
+            //檢查來源存在
             var source = FindPlatformNow(coordinate);
             if (source == null || !source.AnimalAmount.HasMovableAnimal) return (false, null);
-
+            //檢查目的地存在
             var targetCoordinate = source.Coordinate.Side(direction);
             var target = FindPlatformNow(targetCoordinate);
             if (target == null) return (false, null);
+
+            //檢查中間墻壁
+            var wallCoordinate = new WallCoordinate(source.Coordinate, target.Coordinate);
+            if (Walls.Contains(wallCoordinate)) return (false, null);
 
             var newPlatforms = new HashSet<Platform>(Platforms.Where(item => item != source && item != target));
 
@@ -97,7 +108,8 @@ namespace DivideBySheepSolver
 
             var newBoard = new Board
             {
-                Platforms = newPlatforms
+                Platforms = newPlatforms,
+                Walls = new HashSet<WallCoordinate>(Walls)
             };
 
             return (true, newBoard);
@@ -112,7 +124,9 @@ namespace DivideBySheepSolver
         {
             return other != null &&
                    Platforms.All(a => other.Platforms.Contains(a)) &&
-                   other.Platforms.All(a=>Platforms.Contains(a));
+                   other.Platforms.All(a => Platforms.Contains(a)) &&
+                   Walls.All(w => other.Walls.Contains(w)) &&
+                   other.Walls.All(w => Walls.Contains(w));
         }
 
         public override int GetHashCode()
@@ -131,7 +145,7 @@ namespace DivideBySheepSolver
             {
                 for (int x = minX; x <= maxX; x++)
                 {
-                    text += $"{ FindPlatformNow(new Coordinate(x, y))?.Visual() ?? "           "}{(x!= maxX ? " | " : "")}";
+                    text += $"{ FindPlatformNow(new Coordinate(x, y))?.Visual() ?? "           "}{(x != maxX ? " | " : "")}";
                 }
                 text += "\r\n";
             }

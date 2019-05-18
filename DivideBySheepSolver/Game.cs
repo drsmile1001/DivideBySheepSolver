@@ -19,23 +19,23 @@ namespace DivideBySheepSolver
         public Dictionary<Movement, Board> Routes { get; } = new Dictionary<Movement, Board>();
 
         /// <summary>
+        /// 待移動盤面
+        /// </summary>
+        private List<Board> BoardForTry { get; set; }
+
+        /// <summary>
         /// 到達過的盤面
         /// </summary>
         public HashSet<Board> ReachedBoards { get; } = new HashSet<Board>();
 
-        /// <summary>
-        /// 無效移動
-        /// </summary>
-        public HashSet<Movement> UselessMovements { get; } = new HashSet<Movement>();
-
         public List<(Movement, Board)> Play()
         {
             ReachedBoards.Add(InitialBoard);
+            BoardForTry = new List<Board> { InitialBoard };
             (Movement, Board)? lastMovementAndResult = null;
             while (lastMovementAndResult == null)
             {
-                var boards = Routes.Values.Any() ? Routes.Values.ToArray() : new[] { InitialBoard };
-                lastMovementAndResult = Try(boards);
+                lastMovementAndResult = Try(BoardForTry);
             }
             var solveSteps = new List<(Movement, Board)>();
             var invertRoutes = Routes.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
@@ -54,10 +54,9 @@ namespace DivideBySheepSolver
             return solveSteps;
         }
 
-        public(Movement, Board)? Try(IEnumerable<Board> boards)
+        public (Movement, Board)? Try(IEnumerable<Board> boards)
         {
             var successMovement = boards.AsParallel().SelectMany(board => board.GetAllMovement())
-                    .Where(movement => !Routes.ContainsKey(movement) && !UselessMovements.Contains(movement))
                 .Select(movement =>
                 {
                     var (success, board) = movement.Board.Move(movement.Coordinate, movement.Direction);
@@ -70,21 +69,19 @@ namespace DivideBySheepSolver
                 }).Where(item => item.success)
                 .Select(item => (item.movement, item.board))
                 .ToList();
+            var nextBoardsForTry = new List<Board>();
             foreach (var (movement, board) in successMovement)
             {
-                var isUselessMovement = ReachedBoards.Contains(board);
-                if (isUselessMovement)
-                {
-                    UselessMovements.Add(movement);
+                //如移動結果為曾經到過的盤面，則為無意義嘗試
+                if (ReachedBoards.Contains(board))
                     continue;
-                }
-                else
-                {
-                    Routes.Add(movement, board);
-                    ReachedBoards.Add(board);
-                    if (board.Solved) return (movement, board);
-                }
+
+                Routes.Add(movement, board);
+                ReachedBoards.Add(board);
+                nextBoardsForTry.Add(board);
+                if (board.Solved) return (movement, board);
             }
+            BoardForTry = nextBoardsForTry;
             return null;
         }
     }

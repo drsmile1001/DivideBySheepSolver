@@ -75,7 +75,7 @@ namespace DivideBySheepSolver
         /// 移動動物到另一個平台
         /// </summary>
         /// <param name="other"></param>
-        public bool MoveTo(Platform other,bool razor)
+        public bool MoveTo(Platform other, bool razor)
         {
             if (BoatOrder.HasValue) return false;
             if (other == null) return false;
@@ -96,7 +96,7 @@ namespace DivideBySheepSolver
         /// <param name="sheep"></param>
         /// <param name="sheepHalf"></param>
         /// <param name="wolf"></param>
-        public void MoveIn(int sheep,int sheepHalf,int wolf)
+        public void MoveIn(int sheep, int sheepHalf, int wolf)
         {
             if ((sheep + sheepHalf) > 0 && wolf > 0) throw new ArgumentException();
             sheep += AnimalAmount.Sheep;
@@ -104,7 +104,7 @@ namespace DivideBySheepSolver
             wolf += AnimalAmount.Wolf;
             var wolfFull = AnimalAmount.WolfFull;
             //TODO:確認狼吃羊或半羊的順序
-            if(wolf > 0)
+            if (wolf > 0)
             {
                 var sheepAte = Math.Min(sheep, wolf);
                 sheep -= sheepAte;
@@ -118,7 +118,7 @@ namespace DivideBySheepSolver
             //TODO:確認移入羊與半羊超過島容量時的丟棄做法
             //TODO:救生艇的狀況
             var capacity = Capacity - wolfFull;
-            if(wolf == 0)
+            if (wolf == 0)
             {
                 sheep = Math.Min(sheep, capacity);
                 capacity -= sheep;
@@ -129,9 +129,6 @@ namespace DivideBySheepSolver
             wolf = Math.Min(wolf, capacity);
             AnimalAmount = new AnimalAmount(0, 0, wolf, wolfFull);
         }
-
-
-
 
         public override bool Equals(object obj)
         {
