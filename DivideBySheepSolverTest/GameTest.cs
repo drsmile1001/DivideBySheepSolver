@@ -305,5 +305,33 @@ namespace DivideBySheepSolverTest
             };
             PlayAndLogResult(game);
         }
+
+        [Fact]
+        public void 玩_1_7()
+        {
+            var game = new Game
+            {
+                InitialBoard = new Board
+                {
+                    Platforms = new HashSet<Platform>
+                    {
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),0,6),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),1,3),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),2,2),
+                        new Platform(new Coordinate(2,1),6,new AnimalAmount(6)),
+                        new Platform(new Coordinate(2,2),6,new AnimalAmount(3)),
+                        new Platform(new Coordinate(3,1),5,new AnimalAmount(5)),
+                        new Platform(new Coordinate(3,2),4,new AnimalAmount(2)),
+                        new Platform(new Coordinate(4,2),3,new AnimalAmount(1)),
+                        new Platform(new Coordinate(4,3),4,new AnimalAmount(1)),
+                    },
+                    Walls = new HashSet<WallCoordinate>
+                    {
+                        new WallCoordinate(2,1,2,2)
+                    }
+                }
+            };
+            PlayAndLogResult(game);
+        }
     }
 }

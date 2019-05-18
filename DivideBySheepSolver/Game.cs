@@ -16,7 +16,7 @@ namespace DivideBySheepSolver
         /// <summary>
         /// 盤面路由
         /// </summary>
-        public Dictionary<Movement, Board> Routes { get; } = new Dictionary<Movement, Board>();
+        public List<(Movement Movement, Board Board)> Routes { get; } = new List<(Movement, Board)>();
 
         /// <summary>
         /// 待移動盤面
@@ -38,7 +38,7 @@ namespace DivideBySheepSolver
                 lastMovementAndResult = Try(BoardForTry);
             }
             var solveSteps = new List<(Movement, Board)>();
-            var invertRoutes = Routes.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+            var invertRoutes = Routes.ToDictionary(item => item.Board, kvp => kvp.Movement);
             while (true)
             {
                 solveSteps.Add(lastMovementAndResult.Value);
@@ -76,7 +76,7 @@ namespace DivideBySheepSolver
                 if (ReachedBoards.Contains(board))
                     continue;
 
-                Routes.Add(movement, board);
+                Routes.Add((movement, board));
                 ReachedBoards.Add(board);
                 nextBoardsForTry.Add(board);
                 if (board.Solved) return (movement, board);
