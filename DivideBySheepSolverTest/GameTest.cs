@@ -154,9 +154,11 @@ namespace DivideBySheepSolverTest
         private void PlayAndLogResult(Game game)
         {
             var result = game.Play();
+            var turn = 0;
             foreach (var item in result)
             {
-                _testOutputHelper.WriteLine("---");
+                turn += 1;
+                _testOutputHelper.WriteLine($"--- {turn} ---\r\n");
                 if (item.Item1 != null)
                     _testOutputHelper.WriteLine($"{item.Item1.Coordinate} {item.Item1.Direction}");
                 else
@@ -379,6 +381,123 @@ namespace DivideBySheepSolverTest
                         new Platform(new Coordinate(3,2),5,new AnimalAmount(0,4)),
                         new Platform(new Coordinate(3,3),6,new AnimalAmount(2)),
                         new Platform(new Coordinate(4,2),5,new AnimalAmount(5)),
+                    }
+                }
+            };
+            PlayAndLogResult(game);
+        }
+
+        [Fact]
+        public void 玩_1_10()
+        {
+            var game = new Game
+            {
+                InitialBoard = new Board
+                {
+                    Platforms = new HashSet<Platform>
+                    {
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),0,4),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),1,3),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),2,2),
+                        new Platform(new Coordinate(2,2),6,new AnimalAmount(6)),
+                        new Platform(new Coordinate(3,1),2,new AnimalAmount(1)),
+                        new Platform(new Coordinate(3,2),4,new AnimalAmount()),
+                        new Platform(new Coordinate(3,3),5,new AnimalAmount(5)),
+                        new Platform(new Coordinate(4,3),3,new AnimalAmount(1)),
+                    }
+                }
+            };
+            PlayAndLogResult(game);
+        }
+
+        [Fact]
+        public void 玩_1_11()
+        {
+            var game = new Game
+            {
+                InitialBoard = new Board
+                {
+                    Platforms = new HashSet<Platform>
+                    {
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),0,0,5),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),1,0,3),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),2,4),
+                        new Platform(new Coordinate(2,1),6,new AnimalAmount(0,5)),
+                        new Platform(new Coordinate(2,2),6,new AnimalAmount(1)),
+                        new Platform(new Coordinate(3,1),6,new AnimalAmount(2)),
+                        new Platform(new Coordinate(3,2),6,new AnimalAmount(0,6)),
+                        new Platform(new Coordinate(4,2),6,new AnimalAmount(6)),
+                    }
+                }
+            };
+            PlayAndLogResult(game);
+        }
+
+        [Fact]
+        public void 玩_1_12()
+        {
+            var game = new Game
+            {
+                InitialBoard = new Board
+                {
+                    Platforms = new HashSet<Platform>
+                    {
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),0,5),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),1,4),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),2,3),
+                        new Platform(new Coordinate(2,1),4,new AnimalAmount(2)),
+                        new Platform(new Coordinate(2,2),4,new AnimalAmount(4)),
+                        new Platform(new Coordinate(3,1),3,new AnimalAmount()),
+                        new Platform(new Coordinate(3,2),6,new AnimalAmount(3)),
+                        new Platform(new Coordinate(3,3),4,new AnimalAmount(4)),
+                    }
+                }
+            };
+            PlayAndLogResult(game);
+        }
+
+        [Fact]
+        public void 玩_1_13()
+        {
+            var game = new Game
+            {
+                InitialBoard = new Board
+                {
+                    Platforms = new HashSet<Platform>
+                    {
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),0,3),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),1,0,1),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),2,2),
+                        new Platform(new Coordinate(2,1),5,new AnimalAmount(3)),
+                        new Platform(new Coordinate(2,2),4,new AnimalAmount(0,4)),
+                        new Platform(new Coordinate(3,1),5,new AnimalAmount(4)),
+                        new Platform(new Coordinate(3,2),4,new AnimalAmount(0,2)),
+                        new Platform(new Coordinate(3,3),4,new AnimalAmount(4)),
+                        new Platform(new Coordinate(4,2),5,new AnimalAmount(2)),
+                    }
+                }
+            };
+            PlayAndLogResult(game);
+        }
+
+        [Fact]
+        public void 玩_1_14()
+        {
+            var game = new Game
+            {
+                InitialBoard = new Board
+                {
+                    Platforms = new HashSet<Platform>
+                    {
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),0,5),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),1,3),
+                        new Platform(new Coordinate(1,2),9,new AnimalAmount(),2,4),
+                        new Platform(new Coordinate(2,1),6,new AnimalAmount(6)),
+                        new Platform(new Coordinate(2,2),3,new AnimalAmount(3)),
+                        new Platform(new Coordinate(3,1),2,new AnimalAmount(2)),
+                        new Platform(new Coordinate(3,2),4,new AnimalAmount(4)),
+                        new Platform(new Coordinate(3,3),1,new AnimalAmount(1)),
+                        new Platform(new Coordinate(4,2),1,new AnimalAmount(1)),
                     }
                 }
             };
