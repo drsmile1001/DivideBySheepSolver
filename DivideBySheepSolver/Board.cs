@@ -20,6 +20,11 @@ namespace DivideBySheepSolver
         public HashSet<WallCoordinate> Walls { get; set; } = new HashSet<WallCoordinate>();
 
         /// <summary>
+        /// 鐳射
+        /// </summary>
+        public HashSet<WallCoordinate> Laser { get; set; } = new HashSet<WallCoordinate>();
+
+        /// <summary>
         /// 目前可操作的島嶼或救生艇
         /// </summary>
         public IEnumerable<Platform> PlatformsNow
@@ -96,6 +101,9 @@ namespace DivideBySheepSolver
             var wallCoordinate = new WallCoordinate(source.Coordinate, target.Coordinate);
             if (Walls.Contains(wallCoordinate)) return (false, null);
 
+            //檢查中間鐳射
+            var hasLaser = Laser.Contains(wallCoordinate);
+
             var newPlatforms = new HashSet<Platform>(Platforms.Where(item => item != source && item != target));
 
             source = source.Clone();
@@ -109,7 +117,8 @@ namespace DivideBySheepSolver
             var newBoard = new Board
             {
                 Platforms = newPlatforms,
-                Walls = new HashSet<WallCoordinate>(Walls)
+                Walls = new HashSet<WallCoordinate>(Walls),
+                Laser = new HashSet<WallCoordinate>(Laser)
             };
 
             return (true, newBoard);
@@ -126,12 +135,17 @@ namespace DivideBySheepSolver
                    Platforms.All(a => other.Platforms.Contains(a)) &&
                    other.Platforms.All(a => Platforms.Contains(a)) &&
                    Walls.All(w => other.Walls.Contains(w)) &&
-                   other.Walls.All(w => Walls.Contains(w));
+                   other.Walls.All(w => Walls.Contains(w)) &&
+                   Laser.All(l=>other.Laser.Contains(l)) &&
+                   other.Laser.All(l=>Laser.Contains(l));
         }
 
         public override int GetHashCode()
         {
-            return Platforms.Aggregate(0, (agg, next) => agg ^ next.GetHashCode());
+            var platformsHash = Platforms.Aggregate(0, (agg, next) => agg ^ next.GetHashCode());
+            var wallsHash = Walls.Aggregate(0, (agg, next) => agg ^ next.GetHashCode());
+            var lasersHash = Laser.Aggregate(0, (agg, next) => agg ^ next.GetHashCode());
+            return HashCode.Combine(platformsHash,wallsHash,lasersHash);
         }
 
         public string Visualize()

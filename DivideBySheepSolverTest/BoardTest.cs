@@ -1,4 +1,5 @@
 ﻿using DivideBySheepSolver;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -6,6 +7,8 @@ namespace DivideBySheepSolverTest
 {
     public class BoardTest
     {
+        
+
         [Fact]
         public void 相等測試_空相同()
         {
